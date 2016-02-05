@@ -1,0 +1,23 @@
+= form_for @sem do |f|
+  -@department = Department.all
+  - if @sem.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@sem.errors.count, "error")} prohibited this sem from being saved:"
+      %ul
+        - @sem.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :sname
+    = f.text_field :sname
+  .field
+    = f.label :year
+    = f.text_field :year
+  .field
+    = f.label :department_id
+    = f.select :department_id,(@department.collect{|item|[item.name,item._id]}.uniq),{:prompt => "select option "}
+  .field
+    = f.label :result1
+    = f.file_field :result1
+  .actions
+    = f.submit 'Save'

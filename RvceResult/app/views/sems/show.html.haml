@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Sname:
+  = @sem.sname
+%p
+  %b Year:
+  = @sem.year
+%p
+  %b File:
+  = link_to "Download", @sem.result1.url
+
+= link_to 'Edit', edit_sem_path(@sem)
+\|
+= link_to 'Back', sems_path

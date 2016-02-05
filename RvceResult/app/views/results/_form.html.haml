@@ -1,0 +1,22 @@
+= form_for @result do  |f|
+  - if @result.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@result.errors.count, "error")} prohibited this result from being saved:"
+      %ul
+        - @result.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :usn
+    = f.text_field :usn
+  .field
+    = f.label :department
+    = f.select :department,(@department.collect{|item|[item.name,item._id]}.uniq),{:prompt => "select option "}
+  .field
+    = f.label :sem
+    = f.select :sem,(@sem.collect{|item|[item.sname,item._id]}.uniq),{:prompt => "select option "}
+  .field
+    = f.label :year
+    = f.text_field :year
+  .actions
+    = f.submit 'Save'

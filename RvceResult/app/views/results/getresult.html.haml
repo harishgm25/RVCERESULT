@@ -1,0 +1,56 @@
+
+%br
+%br
+.row
+  .form-group
+    .col-xs-4
+    %h2
+      %span.label.label-default RVCE Provisional Results  
+%br
+= form_for @result, url:{:action => 'showresult', :method => 'post'} do  |f|
+  %center
+    %p#error= flash[:error]
+  - if @result.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@result.errors.count, "error")} prohibited this result from being saved:"
+      %ul
+        - @result.errors.full_messages.each do |msg|
+          %li= msg
+  .row
+    .form-group
+      .col-sm-3
+      .field
+        .col-sm-2
+          = f.label :usn
+        = f.text_field :usn
+  .row
+    .form-group
+      .col-sm-3
+      .field
+        .col-sm-2
+          = f.label :department
+        = f.select :department,(@department.collect{|item|[item.name,item._id]}.uniq),{:prompt => "select option "}
+  
+  .row
+    .form-group
+      .col-sm-3
+      .field
+        .col-sm-2
+          = f.label :sem
+        = f.select :sem,(@sem.collect{|item|[item.sname,item.sname]}.uniq),{:prompt => "select option "}
+  .row
+    .form-group
+      .col-sm-3
+      .field
+        .col-sm-2
+          = f.label :year
+        = f.text_field :year,:value => 2015,:readonly => true
+  .row
+    .form-group
+      .col-sm-5
+      .actions
+        = f.submit 'Search'
+        = button_tag "Reset", type: :reset 
+
+
+  

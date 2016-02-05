@@ -1,0 +1,97 @@
+!!!
+%html
+  %head
+    %title RVCE RESULT
+    = stylesheet_link_tag    "application", :media => "all", 'data-turbolinks-track' => true
+    = javascript_include_tag "application", 'data-turbolinks-track' => true
+    = javascript_include_tag :defaults, "nested_form"
+    = javascript_include_tag :defaults, "rails.validations", "rails.validations.custom" 
+    = csrf_meta_tags
+  %body
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          / .btn-navbar is used as the toggle for collapsed navbar content
+
+          %a.btn.btn-navbar{"data-target" => ".nav-collapse", "data-toggle" => "collapse", :type => "button"}
+            
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+
+          / Be sure to leave the brand out there if you want it shown
+          
+          
+          %a.navbar-brand= image_tag('RVCE_New_Logo.JPG')
+          %a.navbar-brand{:href => "#"} RVCE RESULTS
+            
+          .nav-collapse{:style => "height: auto;"}
+            %ul.nav.nav-pills
+              - if user_signed_in?
+                %li#menu0.dropdown
+                  = link_to('Home', new_user_session_path)
+                %li#menu1.dropdown
+                  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#menu1"}
+                    Result
+                    %b.caret
+                  %ul.dropdown-menu
+                    %li
+                      %a{:href => "/sems"} UploadResult
+                    
+            
+                %li#menu2.dropdown
+                  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#menu2"}
+                    Department
+                    %b.caret
+                  %ul.dropdown-menu
+                    %li
+                      %a{:href => "/departments/new"} Add Department    
+
+                %li#menu3.dropdown
+                  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#menu3"}
+                    Subject
+                    %b.caret
+                  %ul.dropdown-menu
+                    %li
+                      %a{:href => "/subjects"} Add Subject
+                    %li
+                      %a{:href => "/subjects/uploadsubjects"} Upload Subjects  
+                                   
+
+                %li.navbar-right
+                  - if user_signed_in?
+                    = link_to('Logout', destroy_user_session_path)
+                %li.navbar-right
+                  %a
+                    = current_user.email
+             
+                 
+                  
+              - else
+                %li#menu0.dropdown
+                  = link_to('Home')
+                  
+                %li.navbar-right
+                  = link_to(  'Log in', new_user_session_path)  
+                %li#menu1.dropdown.navbar-right
+                  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#menu1"}
+                    Contact
+                    %b.caret
+                  %ul.dropdown-menu
+                    %li
+                      %a{:href => ""} -------------- 
+                
+                   
+                      
+              
+                      
+                    
+                  
+    #wrapper            
+      .container
+        .row
+          .span12.main
+            = yield
+      
+           
+    

@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Usn:
+  = @result.usn
+%p
+  %b Department:
+  = @result.department
+%p
+  %b Branch:
+  = @result.branch
+%p
+  %b Sem:
+  = @result.sem
+%p
+  %b Year:
+  = @result.year
+
+= link_to 'Edit', edit_result_path(@result)
+\|
+= link_to 'Back', results_path

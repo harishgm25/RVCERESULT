@@ -1,0 +1,72 @@
+.row
+  .form-group
+    .col-xs-2
+    %h2
+      %span.label.label-default RVCE Provisional Results 
+
+
+%br
+%br
+.row
+  .col-xs-3.brd
+    .center-block
+      %p
+        %b USN:
+        = @row["USN"]
+  .col-xs-3.brd
+    .center-block
+      %p
+        %b NAME:
+        = @row["Name"]
+
+
+.row
+  .col-md-3.brd
+    .center-block
+      %p
+        %b BRANCH:
+        = @row["Branch"]
+  .col-md-4.brd
+    .center-block
+      %p
+        %b SEMESTER:
+        = @row["Semester"]
+  .col-md-4.brd
+    .center-block
+      %p
+        %b Grade
+        
+      %br
+- @row.to_hash.each_pair do |key, value|
+  - if (key.to_s != "S.No.") &&(key.to_s != "USN") && (key.to_s != "Name") && (key.to_s != "Branch") && (key.to_s != "Semester")&& (key.to_s != "SGPA")&& (key.to_s != "CGPA")
+    .row
+      .col-md-2.brd
+        .center-block
+          %p
+            #{key} 
+      .col-md-5.brd
+        .center-block
+          %p
+            = Subject.where(scode: key.to_s).first.sname
+      .col-md-2.brd
+        .center-block
+          %p
+            #{value}
+.row
+  .col-md-7.brd
+    .center-block
+      %p
+
+  .col-md-2.brd
+    .center-block
+      %p
+        %b SGPA: 
+        %b
+          = @row["SGPA"]
+  
+
+
+%br
+%b
+%h4
+  = link_to '<< Back', :action => 'getresult'

@@ -1,0 +1,26 @@
+%h1 Listing sems
+
+%table
+  %thead
+    %tr
+      %th Department
+      %th Sname
+      %th Year
+      %th File
+      %th
+      %th
+
+  %tbody
+    - @sems.each do |sem|
+      %tr
+        %td=  Department.find(sem.department_id).name
+        %td= sem.sname
+        %td= sem.year
+        %td= image_tag sem.result1.url
+        %td= link_to 'Show', sem
+        %td= link_to 'Edit', edit_sem_path(sem)
+        %td= link_to 'Destroy', sem, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Sem', new_sem_path
